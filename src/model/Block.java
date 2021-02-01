@@ -3,7 +3,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,8 +13,9 @@ public class Block {
     private int x, y;
     private List<Observer> observers = new ArrayList<>();
 
-    public Block() {
-        x = y = 4;
+    public Block(int x, int y) {
+        this.x = x;
+        this.y = y;
         this.timer = new Timer();
         this.timer.schedule(task(),1000,5000);
     }
@@ -53,8 +53,6 @@ public class Block {
         return y;
     }
     
-    
-
     private TimerTask task() {
         return new TimerTask() {
             @Override
@@ -64,7 +62,7 @@ public class Block {
                 if(r >= 0.15) left();
                 else if(r >= 0.10) right();
                 else if(r >= 0.05) up();
-                else if(r >= 0.0) down();
+                else down();
             }
         };
     }
